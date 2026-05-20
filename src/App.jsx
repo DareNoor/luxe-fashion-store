@@ -12,6 +12,7 @@ import Login from "./pages/Login.jsx"
 import Hero from "./components/Hero.jsx"
 import Categories from "./components/Categories.jsx"
 import FeaturedProducts from "./components/FeaturedProducts.jsx"
+import Footer from "./components/Footer.jsx"
 
 const App = () => {
   return (
@@ -32,6 +33,7 @@ const App = () => {
                 <Route path="/featuredproducts" element={<FeaturedProducts />} />
 
       </Routes>
+      <Footer/>
     </div>
   )
 }
