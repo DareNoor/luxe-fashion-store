@@ -13,9 +13,12 @@ import Hero from "./components/Hero.jsx"
 import Categories from "./components/Categories.jsx"
 import FeaturedProducts from "./components/FeaturedProducts.jsx"
 import Footer from "./components/Footer.jsx"
+import { ShopProvider } from "./context/ShopContext.jsx"
 
 const App = () => {
   return (
+    <>
+    <ShopProvider>
     <div className="min-h-screen bg-cream">
       <Navbar />
       <Routes>
@@ -35,6 +38,8 @@ const App = () => {
       </Routes>
       <Footer/>
     </div>
+    </ShopProvider>
+    </>
   )
 }
 
