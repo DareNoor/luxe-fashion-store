@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { Search, Heart, ShoppingBag, User, Menu, X } from "lucide-react"
+import { useSelector } from 'react-redux'
 
 const navLinks=[
     {label:"Home", path:"/"},
@@ -16,6 +17,8 @@ const Navbar = () => {
         ? "text-gold-dark font-medium border-b border-gold-dark pb-0.5":
         "text-gray-600 hover:text-gold-dark"
     }` 
+    const {items} = useSelector((state)=>state.cart)
+    const cartCount= items.reduce((acc,item)=>acc+item.qty,0)
   return (
 <>
 <nav className='w-full bg-cream/95 backdrop-blur-md border-b border-primary-200 sticky top-0 z-50'>
@@ -38,7 +41,7 @@ const Navbar = () => {
         </button>
         <NavLink to="/cart" className="relative text-gray-600 hover:text-gold transition-colors duration-200">
         <ShoppingBag size={20} strokeWidth={1.5}/>
-        <span className='absolute -top-2 -right-2 bg-gold text-white text-xs w-4 h-4 rounded-full flex items-center justify-center'>0</span>
+        <span className='absolute -top-2 -right-2 bg-gold text-white text-xs w-4 h-4 rounded-full flex items-center justify-center'>{cartCount}</span>
 
         </NavLink>
         <NavLink to="/login" className="hidden md:block text-gray-600 hover:text-gold transition-colors duration-200">

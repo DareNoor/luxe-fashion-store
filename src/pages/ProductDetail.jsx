@@ -3,6 +3,8 @@ import React from 'react'
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { allProducts } from "../utils/products"
+import { useDispatch } from 'react-redux'
+import { addItem } from '../redux/cartSlice'
 
 const ProductDetail = () => {
   const {id}=useParams()
@@ -10,6 +12,7 @@ const ProductDetail = () => {
   const [qty,setQty]=useState(1)
   const [selSize, setSelSize]=useState("M")
   const [wishlisted,setWishlisted]=useState(false)
+  const dispatch = useDispatch()
   if(!product){
     return(
       <div className='min-h-screen flex items-center justify-center bg-cream'>
@@ -59,7 +62,8 @@ const ProductDetail = () => {
           </div>
          </div>
          <div className='flex flex-col sm:flex-row gap-4'>
-          <button className='flex-1 bg-gray-900 hover:bg-black text-white py-4 uppercase tracking-widest text-sm flex items-center justify-center gap-2 transition-colors duration-300'>
+          <button className='flex-1 bg-gray-900 hover:bg-black text-white py-4 uppercase tracking-widest text-sm flex items-center justify-center gap-2 transition-colors duration-300'
+           onClick={()=>dispatch(addItem({...product,size:selSize,qty}))}>
             <ShoppingBag size={18}/> Add to Cart
           </button>
           <button onClick={()=>setWishlisted(!wishlisted)} className='border border-primary-200 hover:border-gray-900 px-6 py-4 flex items-center justify-center transition-colors duration-300'>
