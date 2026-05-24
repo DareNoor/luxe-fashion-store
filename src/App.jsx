@@ -14,6 +14,7 @@ import Categories from "./components/Categories.jsx"
 import FeaturedProducts from "./components/FeaturedProducts.jsx"
 import Footer from "./components/Footer.jsx"
 import { ShopProvider } from "./context/ShopContext.jsx"
+import Admin from "./pages/Admin.jsx"
 
 const App = () => {
   return (
@@ -31,9 +32,11 @@ const App = () => {
         <Route path="/cart" element={<Cart />} />
         <Route path="/login" element={<Login />} />
         <Route path="/product/:id" element={<ProductDetail />} />
-                <Route path="/hero" element={<Hero />} />
-                <Route path="/categories" element={<Categories />} />
-                <Route path="/featuredproducts" element={<FeaturedProducts />} />
+        <Route path="/hero" element={<Hero />} />
+        <Route path="/categories" element={<Categories />} />
+        <Route path="/featuredproducts" element={<FeaturedProducts />} />
+        <Route path="/admin" element={<Admin />} />
+        
 
       </Routes>
       <Footer/>
