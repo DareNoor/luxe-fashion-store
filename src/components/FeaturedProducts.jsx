@@ -1,74 +1,73 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { Heart, ShoppingBag } from "lucide-react"
-
-const products = [
-  {
-    id: 1,
-    name: "Embroidered Lawn Suit",
-    category: "Women",
-    price: 4500,
-    discountPrice: 3200,
-    image: "https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?w=600&q=80",
-  },
-  {
-    id: 2,
-    name: "Pearl Drop Earrings",
-    category: "Accessories",
-    price: 1200,
-    discountPrice: 950,
-    image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600&q=80",
-  },
-  {
-    id: 3,
-    name: "Linen Kurta — Men",
-    category: "Men",
-    price: 2800,
-    discountPrice: 2100,
-    image: "https://images.unsplash.com/photo-1622470953794-aa9c70b0fb9d?w=600&q=80",
-  },
-  {
-    id: 4,
-    name: "Printed Frock — Kids",
-    category: "Kids",
-    price: 1800,
-    discountPrice: 1400,
-    image: "https://images.unsplash.com/photo-1622290291468-a28f7a7dc6a8?w=600&q=80",
-  },
-  {
-    id: 5,
-    name: "Silk Dupatta",
-    category: "Women",
-    price: 2200,
-    discountPrice: 1750,
-    image: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=600&q=80",
-  },
-  {
-    id: 6,
-    name: "Leather Tote Bag",
-    category: "Accessories",
-    price: 5500,
-    discountPrice: 4200,
-    image: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600&q=80",
-  },
-  {
-    id: 7,
-    name: "Chiffon Saree",
-    category: "Women",
-    price: 6500,
-    discountPrice: 5200,
-    image: "https://images.unsplash.com/photo-1583391733956-6c78276477e2?w=600&q=80",
-  },
-  {
-    id: 8,
-    name: "Classic White Shirt",
-    category: "Men",
-    price: 1900,
-    discountPrice: 1500,
-    image: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=600&q=80",
-  },
-]
-
+import axios from "axios"
+// const products = [
+//   {
+//     id: 1,
+//     name: "Embroidered Lawn Suit",
+//     category: "Women",
+//     price: 4500,
+//     discountPrice: 3200,
+//     image: "https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?w=600&q=80",
+//   },
+//   {
+//     id: 2,
+//     name: "Pearl Drop Earrings",
+//     category: "Accessories",
+//     price: 1200,
+//     discountPrice: 950,
+//     image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600&q=80",
+//   },
+//   {
+//     id: 3,
+//     name: "Linen Kurta — Men",
+//     category: "Men",
+//     price: 2800,
+//     discountPrice: 2100,
+//     image: "https://images.unsplash.com/photo-1622470953794-aa9c70b0fb9d?w=600&q=80",
+//   },
+//   {
+//     id: 4,
+//     name: "Printed Frock — Kids",
+//     category: "Kids",
+//     price: 1800,
+//     discountPrice: 1400,
+//     image: "https://images.unsplash.com/photo-1622290291468-a28f7a7dc6a8?w=600&q=80",
+//   },
+//   {
+//     id: 5,
+//     name: "Silk Dupatta",
+//     category: "Women",
+//     price: 2200,
+//     discountPrice: 1750,
+//     image: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=600&q=80",
+//   },
+//   {
+//     id: 6,
+//     name: "Leather Tote Bag",
+//     category: "Accessories",
+//     price: 5500,
+//     discountPrice: 4200,
+//     image: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600&q=80",
+//   },
+//   {
+//     id: 7,
+//     name: "Chiffon Saree",
+//     category: "Women",
+//     price: 6500,
+//     discountPrice: 5200,
+//     image: "https://images.unsplash.com/photo-1583391733956-6c78276477e2?w=600&q=80",
+//   },
+//   {
+//     id: 8,
+//     name: "Classic White Shirt",
+//     category: "Men",
+//     price: 1900,
+//     discountPrice: 1500,
+//     image: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=600&q=80",
+//   },
+// ]
 const ProductCard = ({ product }) => {
   const [wishlisted, setWishlisted] = useState(false)
 
@@ -84,7 +83,7 @@ const ProductCard = ({ product }) => {
 
         {/* Product image */}
         <img
-          src={product.image}
+src={product.images?.[0]?.url}
           alt={product.name}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
@@ -119,7 +118,7 @@ const ProductCard = ({ product }) => {
         <p className="font-body text-xs text-gold tracking-widest uppercase mb-1">
           {product.category}
         </p>
-        <Link to={`/product/${product.id}`}>
+        <Link to={`/product/${product._id}`}>
           <h3 className="font-heading text-base text-gray-900 hover:text-gold-dark transition-colors duration-200 mb-2">
             {product.name}
           </h3>
@@ -139,6 +138,33 @@ const ProductCard = ({ product }) => {
 }
 
 const FeaturedProducts = () => {
+  const [products, setProducts] = useState([])
+useEffect(() => {
+
+  const fetchProducts = async () => {
+
+    try {
+
+      const { data } = await axios.get(
+        "http://localhost:5000/api/products"
+      )
+
+      const featuredOnly = data.filter(
+        (product) => product.featured === true
+      )
+
+      setProducts(featuredOnly)
+
+    } catch (error) {
+
+      console.log(error)
+
+    }
+  }
+
+  fetchProducts()
+
+}, [])
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
 
@@ -158,7 +184,7 @@ const FeaturedProducts = () => {
       {/* Products grid */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
         {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard key={product._id} product={product} />
         ))}
       </div>
 

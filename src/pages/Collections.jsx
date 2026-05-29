@@ -1,9 +1,14 @@
-import React from 'react'
+import { useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 
 const Collections = () => {
-  return (
-    <div>Collections</div>
-  )
+  const navigate = useNavigate()
+  
+  useEffect(() => {
+    navigate("/shop")
+  }, [])
+
+  return null
 }
 
 export default Collections

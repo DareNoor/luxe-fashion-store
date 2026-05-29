@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit"
 import cartReducer from "./cartSlice"
+import userReducer from "./userSlice"
 
 const saveToLocalStorage = (state) => {
   try {
@@ -17,7 +18,8 @@ const loadFromLocalStorage = () => {
 
 export const store = configureStore({
   reducer: {
-    cart: cartReducer
+    cart: cartReducer,
+    user: userReducer
   },
   preloadedState: loadFromLocalStorage()
 })

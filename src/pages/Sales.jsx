@@ -1,9 +1,14 @@
-import React from 'react'
+import { useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 
-const Sales = () => {
-  return (
-    <div>Sales</div>
-  )
+const Sale = () => {
+  const navigate = useNavigate()
+  
+  useEffect(() => {
+    navigate("/shop?tag=Sale")
+  }, [])
+
+  return null
 }
 
-export default Sales
+export default Sale

@@ -1,9 +1,13 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Eye, EyeOff } from "lucide-react"
-
+import { useDispatch } from "react-redux"
+import { setLoading, setUser, setError } from '../redux/userSlice'
+import api from '../utils/api'
+import toast from "react-hot-toast"
 const Login = () => {
-
+const dispatch=useDispatch()
+const navigate=useNavigate()
   const [isLogin, setIsLogin] = useState(true)
   const [showPass, setShowPass] = useState(false)
 
@@ -55,7 +59,7 @@ const Login = () => {
     return newError
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit =async (e) => {
 
     e.preventDefault()
 
@@ -64,6 +68,16 @@ const Login = () => {
     if (Object.keys(newError).length > 0) {
       setErrors(newError)
       return
+    }
+    try {
+      dispatch(setLoading())
+      const endpoint= isLogin?"/auth/login":"/auth/register"
+      const {data}= await api.post(endpoint,formData)
+      toast.success(isLogin ? "Login successful" : "Account created")
+      dispatch(setUser(data))
+      navigate("/")
+    } catch (error) {
+     toast.error(error.response?.data?.message || "Something went wrong")    
     }
 
     console.log("Form submitted:", formData)
